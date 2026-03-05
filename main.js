@@ -7,24 +7,21 @@ const fortunes = [
 
 let currentSeed = 0;
 
-// 1. 문자열을 고유한 해시 숫자(Seed)로 변환하는 함수
 function generateHash(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // 32비트 정수로 변환
+        hash = hash & hash;
     }
     return Math.abs(hash);
 }
 
-// 2. 시드(Seed) 기반 난수 생성기 (일반 Math.random 대체)
 function seededRandom() {
     const x = Math.sin(currentSeed++) * 10000;
     return x - Math.floor(x);
 }
 
-// 공 색상 반환 함수
 function getLottoColorClass(num) {
     if (num <= 10) return 'color-1';
     if (num <= 20) return 'color-2';
@@ -33,7 +30,6 @@ function getLottoColorClass(num) {
     return 'color-5';
 }
 
-// 로또 번호 6개 생성 (시드 기반)
 function generateLottoNumbers() {
     const numbers = [];
     while (numbers.length < 6) {
@@ -47,6 +43,7 @@ function generateLottoNumbers() {
 
 function startAnalysis() {
     const birthdate = document.getElementById('birthdate').value;
+    const birthtime = document.getElementById('birthtime').value;
     const gender = document.getElementById('gender').value;
 
     if (!birthdate) {
@@ -59,29 +56,26 @@ function startAnalysis() {
 
     setTimeout(() => {
         document.getElementById('loading').style.display = 'none';
-        showResults(birthdate, gender);
+        showResults(birthdate, birthtime, gender);
     }, 1500);
 }
 
-function showResults(birthdate, gender) {
-    document.getElementById('result').style.display = 'block';
+function showResults(birthdate, birthtime, gender) {
+    document.getElementById('result-wrapper').style.display = 'block';
 
-    // 핵심: 오늘 날짜 + 생년월일 + 성별을 합쳐서 고유 문자열 생성
     const today = new Date();
     const dateString = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    const uniqueString = birthdate + gender + dateString;
+    // 태어난 시간(birthtime) 변수도 조합에 추가하여 시드값을 더욱 세밀하게 조정
+    const uniqueString = birthdate + birthtime + gender + dateString;
 
-    // 문자열을 해시 변환하여 시드값으로 설정
     currentSeed = generateHash(uniqueString);
 
-    // 고정된 시드를 바탕으로 운세 선택
     const fortuneIndex = Math.floor(seededRandom() * fortunes.length);
     const selectedFortune = fortunes[fortuneIndex];
     
     document.getElementById('fortune-title').innerText = selectedFortune.title;
     document.getElementById('fortune-desc').innerText = selectedFortune.desc;
 
-    // 로또 번호 5세트 생성 및 렌더링
     const lottoContainer = document.getElementById('lotto-results');
     lottoContainer.innerHTML = ''; 
 
@@ -107,7 +101,28 @@ function showResults(birthdate, gender) {
     }
 }
 
+function saveAsImage() {
+    // 이미지 캡처 시 워터마크 표시
+    document.getElementById('watermark').style.display = 'block';
+    
+    const captureDiv = document.getElementById('capture-area');
+    
+    html2canvas(captureDiv, {
+        backgroundColor: '#1e1e1e', // 캡처 시 배경색 지정 (다크모드 유지)
+        scale: 2 // 고화질 캡처를 위해 해상도 2배 증가
+    }).then(canvas => {
+        // 워터마크 다시 숨김
+        document.getElementById('watermark').style.display = 'none';
+
+        // 이미지 파일로 변환하여 다운로드 트리거
+        const link = document.createElement('a');
+        link.download = '오늘의_로또_운세.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+}
+
 function resetApp() {
-    document.getElementById('result').style.display = 'none';
+    document.getElementById('result-wrapper').style.display = 'none';
     document.getElementById('input-section').style.display = 'block';
 }

@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-light);
     margin: 0;
@@ -21,7 +21,7 @@ body {
 
 .container {
     background-color: var(--container-bg);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
     width: 100%;
@@ -73,7 +73,7 @@ button {
     padding: 15px 20px;
     width: 100%;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -83,6 +83,21 @@ button {
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
+}
+
+.btn-secondary {
+    background: #333;
+    color: white;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
 }
 
 #loading {
@@ -105,8 +120,15 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
-#result {
+#result-wrapper {
     display: none;
+}
+
+/* 캡처될 영역의 스타일 */
+#capture-area {
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 10px;
     text-align: left;
 }
 
@@ -115,7 +137,7 @@ button:hover {
     padding: 20px;
     border-left: 4px solid var(--gold-primary);
     border-radius: 8px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .fortune-title {
@@ -129,7 +151,7 @@ button:hover {
     background-color: #252525;
     padding: 15px;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -166,9 +188,23 @@ button:hover {
 .color-4 { background-color: #aaaaaa; }
 .color-5 { background-color: #b0d840; color: #333; text-shadow: none; }
 
+.watermark {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 15px;
+    display: none; /* 평소엔 숨기고 캡처할 때만 표시 */
+}
+
 .footer-note {
     margin-top: 30px;
     font-size: 12px;
     color: #666;
     text-align: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
