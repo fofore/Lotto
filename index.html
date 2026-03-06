@@ -1,39 +1,111 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5G33D7MZ');</script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HWFJEGBY0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-7HWFJEGBY0');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9067817391644990"
      crossorigin="anonymous"></script>
+     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winner's Secret - 1등 당첨자의 비법</title>
+    <meta name="description" content="사주 명리학과 1등 당첨자의 통계 알고리즘을 결합한 무료 로또 번호 생성기입니다. 생년월일을 바탕으로 오늘의 재물운과 행운의 번호를 확인하세요.">
+    <title>Winner's Secret - 1등 당첨자의 비법 | 사주 기반 로또 번호</title>
+    
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --gold-primary: #FFD700;
+            --gold-secondary: #DAA520;
+            --text-light: #f5f5f5;
+            --text-muted: #aaaaaa;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: var(--container-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid #333;
+            margin-top: 20px;
+        }
+        h1 { color: var(--gold-primary); margin-bottom: 5px; font-size: 28px; }
+        .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; color: var(--gold-secondary); font-weight: bold; }
+        input[type="date"], select { width: 100%; padding: 12px; border: 1px solid #444; background-color: #2a2a2a; color: white; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); color: #000; border: none; padding: 15px 20px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4); }
+        .btn-secondary { background: #333; color: white; margin-top: 10px; }
+        .btn-save { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; }
+        
+        #loading { display: none; margin: 30px 0; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid var(--gold-primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        #result-wrapper { display: none; }
+        #capture-area { background-color: var(--container-bg); padding: 20px; border-radius: 10px; text-align: left; }
+        .fortune-box { background-color: #2a2a2a; padding: 20px; border-left: 4px solid var(--gold-primary); border-radius: 8px; margin-bottom: 25px; }
+        .fortune-title { color: var(--gold-primary); font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .lotto-row { background-color: #252525; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+        .set-label { font-weight: bold; color: var(--text-muted); width: 50px; }
+        .balls { display: flex; gap: 8px; }
+        .ball { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; font-size: 14px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .color-1 { background-color: #fbc400; color: #333; text-shadow: none; }
+        .color-2 { background-color: #69c8f2; }
+        .color-3 { background-color: #ff7272; }
+        .color-4 { background-color: #aaaaaa; }
+        .color-5 { background-color: #b0d840; color: #333; text-shadow: none; }
+        .watermark { text-align: center; font-size: 12px; color: #666; margin-top: 15px; display: none; }
+        .button-group { display: flex; gap: 10px; margin-top: 20px; }
+
+        /* 애드센스 SEO용 콘텐츠 영역 */
+        .content-section { max-width: 500px; margin: 40px auto; padding: 20px; background-color: var(--container-bg); border-radius: 10px; font-size: 14px; line-height: 1.6; color: #ccc; border: 1px solid #333; }
+        .content-section h2 { color: var(--gold-secondary); font-size: 18px; border-bottom: 1px solid #444; padding-bottom: 10px; margin-top: 0; }
+        
+        /* 푸터 링크 */
+        .site-footer { text-align: center; margin-top: 20px; padding-bottom: 30px; font-size: 12px; color: #666; }
+        .site-footer a { color: #888; text-decoration: underline; margin: 0 10px; cursor: pointer; }
+        .site-footer a:hover { color: var(--text-light); }
+
+        /* 모달 (팝업창) 스타일 */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background-color: #1e1e1e; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; padding: 25px; border-radius: 10px; border: 1px solid #444; color: #ddd; position: relative; line-height: 1.6; font-size: 14px; text-align: left; }
+        .modal-content h2 { color: var(--gold-primary); margin-top: 0; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; border: none; background: none; }
+        .close-btn:hover { color: white; }
+    </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G33D7MZ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-    <div class="container" id="main-container">
+<div class="container" id="main-container">
         <h1>Winner's Secret</h1>
-        <div class="subtitle">실제 1등 당첨자의 알고리즘과 당신의 사주가 만났습니다.</div>
+        <div class="subtitle">실제 로또1등 당첨자의 알고리즘과 당신의 사주가 만났습니다.</div>
 
         <div id="input-section">
             <div class="form-group">
@@ -101,12 +173,178 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <button class="btn-secondary" onclick="resetApp()">다시 하기</button>
             </div>
         </div>
+    </div>
 
-        <div class="footer-note">
-            ※ 본 서비스는 1등 당첨자의 통계적 기법과 재미를 위한 운세 요소를 결합한 것입니다.<br>과도한 몰입은 금물이며 소액으로 즐기시길 바랍니다.
+    <article class="content-section">
+        <h2>신개념 로또 번호 생성기: 사주와 통계의 만남</h2>
+        <p>Winner's Secret은 사용자의 생년월일과 태어난 시간(사주팔자)을 기반으로 한 명리학적 분석과 실제 로또 1등 당첨자의 알고리즘을 결합한 신개념 로또 번호 생성기입니다.</p>
+        <p>사용자가 입력한 정보는 고유의 알고리즘을 거쳐 그날의 '재물운'을 측정하는 기준이 되며, 이에 따라 당일 최적화된 추천 번호 5세트를 무료로 제공합니다. 재미와 통계를 결합한 특별한 행운을 경험해 보세요.</p>
+    </article>
+
+    <footer class="site-footer">
+        <a onclick="openModal('termsModal')">이용약관</a> | 
+        <a onclick="openModal('privacyModal')">개인정보처리방침</a>
+        <p style="margin-top: 10px;">© 2026 Winner's Secret. All rights reserved.</p>
+    </footer>
+
+    <div id="termsModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('termsModal')">&times;</button>
+            <h2>이용약관</h2>
+            <p><strong>제 1조 (목적)</strong><br>본 약관은 Winner's Secret(이하 '서비스')에서 제공하는 웹페이지 및 운세/로또 번호 생성 기능의 이용 조건 및 면책 사항을 규정합니다.</p>
+            <p><strong>제 2조 (서비스의 성격)</strong><br>본 서비스는 개인의 생년월일 데이터를 활용한 해시 알고리즘과 통계적 난수 생성기를 결합한 '엔터테인먼트 목적'의 무료 서비스입니다.</p>
+            <p><strong>제 3조 (면책 조항 및 책임의 한계)</strong><br>1. 본 서비스에서 제공하는 운세 결과 및 로또 추천 번호는 실제 로또 1등 당첨을 보장하지 않습니다.<br>2. 사용자가 본 서비스의 결과를 신뢰하여 복권을 구매하거나 기타 금전적 지출을 함으로써 발생하는 모든 결과(손실 포함)에 대한 책임은 전적으로 사용자 본인에게 있습니다.<br>3. 서비스 제공자는 사용자의 복권 구매로 인한 어떠한 법적, 도의적 책임도 지지 않습니다.</p>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <div id="privacyModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('privacyModal')">&times;</button>
+            <h2>개인정보처리방침</h2>
+            <p><strong>1. 수집하는 개인정보 항목 및 이용 목적</strong><br>본 사이트는 운세 및 번호 추출 로직(알고리즘 연산)을 위해 화면상에서 사용자의 '생년월일, 성별, 태어난 시간'을 입력받습니다. 해당 정보는 브라우저 내부에서만 일회성으로 연산 처리되며, <strong>어떠한 서버로도 전송되거나 저장되지 않습니다.</strong></p>
+            <p><strong>2. 제3자 광고 게재 및 쿠키(Cookie) 사용</strong><br>본 웹사이트는 Google 애드센스(Google AdSense)를 포함한 제3자 광고 업체의 광고를 게재할 수 있습니다.<br>- Google을 포함한 타사 공급업체는 쿠키를 사용하여 사용자가 이 웹사이트나 다른 웹사이트에 이전에 방문한 기록을 기반으로 광고를 게재합니다.<br>- Google의 광고 쿠키 사용을 통해 Google 및 파트너는 사용자의 사이트 방문 및 인터넷의 다른 사이트 방문을 기반으로 사용자에게 광고를 게재할 수 있습니다.</p>
+            <p><strong>3. 맞춤 광고 거부</strong><br>사용자는 <a href="https://adssettings.google.com/" target="_blank" style="color:var(--gold-secondary);">광고 설정</a>을 방문하여 맞춤광고를 선택 해제할 수 있습니다.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- 정책 모달 관련 스크립트 ---
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        // 모달 바깥 영역 클릭 시 닫기
+        window.onclick = function(event) {
+            if (event.target.className === 'modal-overlay') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // --- 로또 생성기 핵심 스크립트 ---
+        const fortunes = [
+            { title: "🌟 [매우 좋음] 대박의 기운이 감돕니다!", desc: "오늘은 상위 당첨의 기운이 매우 강합니다. 1, 2등을 노려볼 만한 완벽한 타이밍입니다. 행운의 숫자들이 당신을 향해 정렬하고 있네요!" },
+            { title: "✨ [좋음] 흐름이 긍정적입니다.", desc: "좋은 재물운이 들어와 있습니다. 3등 이상의 상위권 당첨 확률이 평소보다 높습니다. 기분 좋은 마음으로 도전해 보세요." },
+            { title: "🍀 [보통] 안정적인 하루입니다.", desc: "무난한 운세입니다. 4등, 5등의 소소한 당첨으로 일상의 작은 기쁨을 누리기에 적합한 날입니다. 가볍게 즐겨보세요." },
+            { title: "🌙 [주의] 오늘은 신중하세요.", desc: "재물운이 잠시 쉬어가는 날입니다. 큰 기대보다는 복권 구입 행위 자체의 즐거움만 느끼시는 것을 권장합니다." }
+        ];
+
+        let currentSeed = 0;
+
+        function generateHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+
+        function seededRandom() {
+            const x = Math.sin(currentSeed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function getLottoColorClass(num) {
+            if (num <= 10) return 'color-1';
+            if (num <= 20) return 'color-2';
+            if (num <= 30) return 'color-3';
+            if (num <= 40) return 'color-4';
+            return 'color-5';
+        }
+
+        function generateLottoNumbers() {
+            const numbers = [];
+            while (numbers.length < 6) {
+                const num = Math.floor(seededRandom() * 45) + 1;
+                if (!numbers.includes(num)) {
+                    numbers.push(num);
+                }
+            }
+            return numbers.sort((a, b) => a - b);
+        }
+
+        function startAnalysis() {
+            const birthdate = document.getElementById('birthdate').value;
+            const birthtime = document.getElementById('birthtime').value;
+            const gender = document.getElementById('gender').value;
+
+            if (!birthdate) {
+                alert("생년월일을 입력해주세요!");
+                return;
+            }
+
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                showResults(birthdate, birthtime, gender);
+            }, 1500);
+        }
+
+        function showResults(birthdate, birthtime, gender) {
+            document.getElementById('result-wrapper').style.display = 'block';
+
+            const today = new Date();
+            const dateString = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            const uniqueString = birthdate + birthtime + gender + dateString;
+
+            currentSeed = generateHash(uniqueString);
+
+            const fortuneIndex = Math.floor(seededRandom() * fortunes.length);
+            const selectedFortune = fortunes[fortuneIndex];
+            
+            document.getElementById('fortune-title').innerText = selectedFortune.title;
+            document.getElementById('fortune-desc').innerText = selectedFortune.desc;
+
+            const lottoContainer = document.getElementById('lotto-results');
+            lottoContainer.innerHTML = ''; 
+
+            const setNames = ['A', 'B', 'C', 'D', 'E'];
+
+            for (let i = 0; i < 5; i++) {
+                const nums = generateLottoNumbers();
+                let ballsHtml = '';
+                
+                nums.forEach(num => {
+                    ballsHtml += `<div class="ball ${getLottoColorClass(num)}">${num}</div>`;
+                });
+
+                const rowHtml = `
+                    <div class="lotto-row">
+                        <div class="set-label">${setNames[i]} 세트</div>
+                        <div class="balls">
+                            ${ballsHtml}
+                        </div>
+                    </div>
+                `;
+                lottoContainer.innerHTML += rowHtml;
+            }
+        }
+
+        function saveAsImage() {
+            document.getElementById('watermark').style.display = 'block';
+            const captureDiv = document.getElementById('capture-area');
+            
+            html2canvas(captureDiv, {
+                backgroundColor: '#1e1e1e',
+                scale: 2
+            }).then(canvas => {
+                document.getElementById('watermark').style.display = 'none';
+                const link = document.createElement('a');
+                link.download = '오늘의_로또_운세.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        function resetApp() {
+            document.getElementById('result-wrapper').style.display = 'none';
+            document.getElementById('input-section').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
