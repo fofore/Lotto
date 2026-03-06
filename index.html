@@ -142,7 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div id="loading">
             <div class="spinner"></div>
-            <div style="color: var(--gold-secondary);">사주 명식과 오늘의 일진(日辰)을 분석 중입니다...</div>
+            <div id="loading-message" style="color: var(--gold-secondary); font-size: 14px; text-align: center;"></div>
         </div>
 
         <div id="result-wrapper">
@@ -215,7 +215,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-        // 모달 바깥 영역 클릭 시 닫기
         window.onclick = function(event) {
             if (event.target.className === 'modal-overlay') {
                 event.target.style.display = 'none';
@@ -279,10 +278,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             document.getElementById('input-section').style.display = 'none';
             document.getElementById('loading').style.display = 'block';
 
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                showResults(birthdate, birthtime, gender);
-            }, 1500);
+            const loadingMessages = [
+                "1등 당첨자의 고유 필터링 로직을 불러오는 중...",
+                "역대 당첨 번호와의 중복 패턴 분석 중...",
+                "홀짝 비율 및 총합 구간 밸런스 최적화 중...",
+                "사용자의 사주(四柱)와 최적의 번호 조합 동기화 중..."
+            ];
+            const messageElement = document.getElementById('loading-message');
+
+            let index = 0;
+            function displayNextMessage() {
+                if (index < loadingMessages.length) {
+                    messageElement.innerText = loadingMessages[index];
+                    index++;
+                    setTimeout(displayNextMessage, 900);
+                } else {
+                    document.getElementById('loading').style.display = 'none';
+                    showResults(birthdate, birthtime, gender);
+                }
+            }
+            displayNextMessage();
         }
 
         function showResults(birthdate, birthtime, gender) {
